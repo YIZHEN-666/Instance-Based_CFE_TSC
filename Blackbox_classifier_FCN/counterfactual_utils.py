@@ -23,19 +23,39 @@ import matplotlib.pyplot as plt
 import numpy as np
 import os
 import pandas as pd
-import seaborn as sns
-from sklearn.datasets import load_iris
-from alibi.explainers import CEM
-from sklearn.model_selection import train_test_split
 
-from sklearn.svm import SVC
+#原来的
+#import seaborn as sns
+#from sklearn.datasets import load_iris
+#from alibi.explainers import CEM
+#from sklearn.model_selection import train_test_split
+
+#from sklearn.svm import SVC
+# 改成 try/except，可选导入（不影响时间序列主流程）
+try:
+   import seaborn as sns
+   from sklearn.datasets import load_iris
+   from alibi.explainers import CEM
+   from sklearn.model_selection import train_test_split
+   from sklearn.svm import SVC
+   _ALIBI_OK = True
+except Exception:
+   _ALIBI_OK = False
+
 from sklearn.linear_model import LogisticRegression
 from scipy.optimize import minimize
 from scipy.spatial.distance import cdist, pdist
 from scipy import stats
 from sklearn.neighbors import DistanceMetric
 from tslearn.datasets import UCR_UEA_datasets
-from tslearn.neighbors import NearestNeighbors, KNeighborsTimeSeries
+
+# 原来：
+# from tslearn.neighbors import NearestNeighbors, KNeighborsTimeSeries
+
+from sklearn.neighbors import NearestNeighbors
+from tslearn.neighbors import KNeighborsTimeSeries
+
+
 from sklearn.metrics import accuracy_score
 from sklearn import preprocessing
 print('TF version: ', tf.__version__)
